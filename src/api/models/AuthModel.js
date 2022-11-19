@@ -10,7 +10,12 @@ const insertNewUser = async (Item) => {
     return await query.save();
 }
 
+const updateUserData = async (userUUID, Item) => {
+    return await UsersSchema.updateOne({ uuid: userUUID }, Item);
+}
+
 export default {
     getUserByEmail,
-    insertNewUser
+    insertNewUser,
+    updateUserData
 }

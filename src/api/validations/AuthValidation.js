@@ -44,7 +44,41 @@ const loginValidation = () => {
     ];
 }
 
+const passwordRecoveryValidation = () => {
+    return [
+        body('email')
+            .isEmail()
+            .normalizeEmail()
+            .withMessage('invalid-email')
+            .exists()
+            .withMessage('required-email')
+    ];
+}
+
+const resetPasswordValidation = () => {
+    return [
+        body('email')
+            .isEmail()
+            .normalizeEmail()
+            .withMessage('invalid-email')
+            .exists()
+            .withMessage('required-email'),
+        body('password')
+            .matches(/\d/)
+            .withMessage('invalid-password')
+            .exists()
+            .withMessage('required-password'),
+        body('code')
+            .isInt({ min: 10000, max: 99999 })
+            .withMessage('invalid-length-code')
+            .exists()
+            .withMessage('required-code'),
+    ];
+}
+
 export default {
     registerValidation,
-    loginValidation
+    loginValidation,
+    passwordRecoveryValidation,
+    resetPasswordValidation
 }

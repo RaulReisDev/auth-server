@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
+import { config } from "dotenv";
+config();
 
 const databaseConnection = () => {
-    mongoose.connect("mongodb+srv://raulreis:GK1aDJeCRlMEa8p6@authserver.i2aprrc.mongodb.net/auth-server-dev");
+    mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_SECRET}@${process.env.MONGODB_SERVER}/${process.env.MONGODB_DATABASE}`);
 
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
